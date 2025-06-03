@@ -5,6 +5,7 @@ dotenv.config();
 // Import dependencies
 import express from "express";
 import mongoose from "mongoose";
+import userRoutes from "./routes/user.route.js";   //import userRoutes(different name) instesd of router
 
 // Initialize Express app
 const app = express();
@@ -20,6 +21,9 @@ const connectDB = async () => {
     process.exit(1); // Exit process if connection fails
   }
 };
+
+// Simple API route
+app.use("/api/user", userRoutes)
 
 // Start server only after DB connection
 const startServer = async () => {
