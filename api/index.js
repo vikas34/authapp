@@ -6,10 +6,16 @@ dotenv.config();
 import express from "express";
 import mongoose from "mongoose";
 import userRoutes from "./routes/user.route.js";   //import userRoutes(different name) instesd of router
+import authRoutes from "./routes/auth.route.js"; 
+
+
 
 // Initialize Express app
 const app = express();
 const PORT = process.env.PORT || 8080;
+
+// Middleware for parsing JSON
+app.use(express.json()); 
 
 // MongoDB connection function
 const connectDB = async () => {
@@ -24,6 +30,7 @@ const connectDB = async () => {
 
 // Simple API route
 app.use("/api/user", userRoutes)
+app.use("/api/auth", authRoutes);
 
 // Start server only after DB connection
 const startServer = async () => {
