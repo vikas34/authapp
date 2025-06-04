@@ -2,13 +2,13 @@ import { Link } from "react-router-dom";
 
 const Header = () => {
   return (
-    <div className="bg-gray-400">
-      <div className=" flex justify-between items-center max-w-6xl mx-auto p-3">
+    <div className="bg-gray-300 py-1.5">
+      <div className=" flex justify-between items-center max-w-6xl mx-auto p-3 ">
         <Link to="/">
-          <h1 className="font-bold "> Auth-App</h1>
+          <h1 className="font-bold text-[#1E3A8A] text-xl"> Auth-App</h1>
         </Link>
 
-        <ul className="flex gap-4 ">
+        <ul className="flex gap-4 font-semibold">
           <Link to="/">
             <li>Home</li>
           </Link>
