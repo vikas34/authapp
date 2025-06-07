@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate} from "react-router-dom";
 
 
 export default function SignUp() {
@@ -18,46 +18,46 @@ export default function SignUp() {
   };
 
   const handleSubmit = async (e) => {
-    e.preventDefault();
-    try {
-      setLoading(true);
-      setError(false);
-      setSuccess(false);
+  e.preventDefault();
+  try {
+    setLoading(true);
+    setError(false);
+    setSuccess(false);
 
-      // Send an asynchronous POST request to the backend signup API endpoint
-      const res = await fetch("/api/auth/signup", {
-        // Define the HTTP method as POST (used to submit data)
-        method: "POST",
-        // Set request headers: telling the server we are sending JSON data
-        headers: {
-          "Content-Type": "application/json",
-        },
-        // Convert the formData object into a JSON string and send it as the request body
-        body: JSON.stringify(formData),
-      });
+    const res = await fetch("/api/auth/signup", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(formData),
+    });
 
-      const data = await res.json();
-      console.log(data);
-      setLoading(false);
+    const data = await res.json();
+    console.log(data);
+    setLoading(false);
 
-      if (data.success === false) {
-        setError(true);
-        return;
-      }
-
-      setSuccess(true);
-      setFormData({
-        username: "",
-        email: "",
-        password: "",
-      }); // ✅ clear input fields here
-
-      
-    } catch (error) {
-      setLoading(false);
+    if (data.success === false) {
       setError(true);
+      return;
     }
-  };
+
+    setSuccess(true);
+    setFormData({
+      username: "",
+      email: "",
+      password: "",
+    });
+
+    // ✅ Redirect to sign-in page after successful & delay signup
+     setTimeout(() => {
+      navigate("/sign-in");
+    }, 1000);
+
+  } catch (error) {
+    setLoading(false);
+    setError(true);
+  }
+};
 
   return (
     <div className="p-3 max-w-lg mx-auto">
